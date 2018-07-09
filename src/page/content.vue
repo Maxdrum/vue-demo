@@ -35,6 +35,10 @@ export default {
     console.log(this.name)
     this.getData()
   },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    '$route': 'getData'
+  },
   methods: {
     getData () {
       this.$api.get('/base/list?Draw=1&VolunteerId=bef55437-9ef0-434b-8005-96227360892a&MaxResultCount=20&SkipCount=1', null, r => {
