@@ -21,6 +21,7 @@
 <script>
 import Header from '../components/header.vue'
 import Footer from '../components/footer.vue'
+// import wx from 'weixin-js-sdk'
 import _ from 'lodash'
 export default {
   components: {Header, Footer},
@@ -30,9 +31,81 @@ export default {
     }
   },
   created () {
-    this.getData()
+    this.init()
   },
   methods: {
+    init () {
+      // this.getData()
+      // this.getShare()
+      this.$nextTick(() => {
+        window.shareData = {
+          imgUrl: '/wap/img/pic-share.jpeg',
+          tLink: window.location.href,
+          tTitle: '金鸡湖培训',
+          tContent: '132'
+        }
+      })
+    },
+    /* getShare () {
+     var url = 'http://zxd.ngrok.fyxmt.com' + '/wechat/jssdk/config?url=' + encodeURIComponent(window.location.href)
+     this.$api.get(url, null, r => {
+     if (r.code === 0) {
+     this.wxInit(r)
+     }
+     })
+     },
+     wxInit (configData) {
+     console.log('请求后的sign参数：', configData)
+     if (configData.code !== 0 || configData.data === null) {
+     alert(configData.msg)
+     return
+     }
+     var signParam = configData.data
+     // 进行校验
+     wx.config({
+     debug: false,
+     appId: signParam.appId,
+     timestamp: signParam.timestamp,
+     nonceStr: signParam.nonceStr,
+     signature: signParam.signature,
+     jsApiList: [
+     'checkJsApi',
+     'onMenuShareTimeline',
+     'onMenuShareAppMessage',
+     'onMenuShareQQ',
+     'onMenuShareWeibo',
+     'hideMenuItems',
+     'showMenuItems',
+     'hideAllNonBaseMenuItem',
+     'showAllNonBaseMenuItem',
+     // 'translateVoice',
+     // 'startRecord',
+     // 'stopRecord',
+     // 'onRecordEnd',
+     // 'playVoice',
+     // 'pauseVoice',
+     // 'stopVoice',
+     // 'uploadVoice',
+     // 'downloadVoice',
+     'chooseImage',
+     'previewImage',
+     'uploadImage',
+     'downloadImage',
+     'getNetworkType',
+     'openLocation',
+     'getLocation',
+     'hideOptionMenu',
+     'showOptionMenu',
+     // 'scanQRCode',
+     'chooseWXPay',
+     // 'openProductSpecificView',
+     // 'addCard',
+     // 'chooseCard',
+     // 'openCard',
+     'closeWindow'
+     ]
+     })
+     }, */
     getData () {
       this.$api.get('/org/kvs', null, r => {
         this.list = r.data
@@ -48,5 +121,7 @@ export default {
 }
 </script>
 <style>
-  .article_list {margin: auto;}
+  .article_list {
+    margin: auto;
+  }
 </style>

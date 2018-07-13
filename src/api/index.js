@@ -38,16 +38,17 @@ function apiAxios (method, url, params, success, failure) {
     withCredentials: false
   })
     .then(function (res) {
-      if (res.data.code === 1) {
+      let data = res.data || {}
+      if (data.result.code === 0) {
         // 成功
         if (success) {
-          success(res.data)
+          success(data.result)
         }
       } else {
         if (failure) {
-          failure(res.data)
+          failure(data.result)
         } else {
-          console.log('error: ' + JSON.stringify(res.data))
+          console.log('error: ' + JSON.stringify(data.result))
         }
       }
     })
